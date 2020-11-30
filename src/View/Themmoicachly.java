@@ -213,8 +213,7 @@ public class Themmoicachly extends JFrame {
 					dispose();
 				}
 				else JOptionPane.showMessageDialog(null, "Thêm/sửa dữ liệu thất bại","Error",JOptionPane.WARNING_MESSAGE);
-
-				//ex.setDatest(textField_8);
+				
 			}
 		});
 	}

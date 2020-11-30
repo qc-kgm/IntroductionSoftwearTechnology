@@ -3,6 +3,8 @@ package View;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JScrollPane;
@@ -18,13 +20,19 @@ public class Thongtinkhaibao extends JPanel {
 	 * Create the panel.
 	 */
 	private String[] columns_kb= {
-			"ID Nhân khẩu","Họ tên","Ngày sinh","Thời gian khai báo","Tình trạng sức khỏe","Lịch sử đi lại","Liên quan đến vùng dịch"
+			"ID Nhân Khẩu","Họ và tên","Ngày sinh","Thời gian khai báo","Tình trạng sức khỏe","Lịch sử đi lại","Liên quan đến vùng dịch"
 	};
 	
 	public Thongtinkhaibao() {
 		setLayout(null);
 		
 		JButton btnNew = new JButton("New");
+		btnNew.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new Themmoikhaibao().setVisible(true);
+			}
+		});
 		btnNew.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNew.setBounds(781, 10, 85, 21);
 		add(btnNew);
