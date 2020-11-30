@@ -16,6 +16,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Font;
 
 public class QLDancu extends JPanel {
 	private JTable table;
@@ -49,6 +52,7 @@ public class QLDancu extends JPanel {
 //		add(table);
 		
 		JComboBox comboBox = new JComboBox(loai);
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBox.setBounds(923, 10, 130, 32);
 		add(comboBox);
 		comboBox.addActionListener(new ActionListener() {
