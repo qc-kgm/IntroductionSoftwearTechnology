@@ -7,29 +7,24 @@ public class ttkhaibao {
 	private String hoten;
 	private String tinhtrang_sk;
 	private Date ngaykhaibao;
-	private Date ngaysinh;
+	private int tuoi;
 	private String lichsu_dilai;
-	private String lido;
-	public ttkhaibao(int id_nk, String hoten, String tinhtrang_sk, Date ngaykhaibao, String lichsu_dilai) {
-		super();
-		this.id_nk = id_nk;
-		this.hoten = hoten;
-		this.tinhtrang_sk = tinhtrang_sk;
-		this.ngaykhaibao = ngaykhaibao;
-		this.lichsu_dilai = lichsu_dilai;
-	}
-	
-	public String getLido() {
-		return lido;
-	}
+	private String ma_kb;
 
-	public void setLido(String lido) {
-		this.lido = lido;
-	}
+
 
 	public ttkhaibao() {
 		super();
 	}
+	
+	public String getMa_kb() {
+		return ma_kb;
+	}
+
+	public void setMa_kb(String ma_kb) {
+		this.ma_kb = ma_kb;
+	}
+
 	public int getId_nk() {
 		return id_nk;
 	}
@@ -60,12 +55,20 @@ public class ttkhaibao {
 	public void setLichsu_dilai(String lichsu_dilai) {
 		this.lichsu_dilai = lichsu_dilai;
 	}
-	public Date getNgaysinh() {
-		return ngaysinh;
+
+	public int getTuoi() {
+		return tuoi;
 	}
-	public void setNgaysinh(Date ngaysinh) {
-		this.ngaysinh = ngaysinh;
+
+	public void setTuoi(int tuoi) {
+		this.tuoi = tuoi;
 	}
+
+
+
+
+
+
 	
 	
 }

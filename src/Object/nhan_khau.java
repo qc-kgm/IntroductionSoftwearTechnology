@@ -8,11 +8,11 @@ public class nhan_khau {
 	private String ho_ten;
 	private String ma_hogd;
 	private String noi_lam_viec;
-	private BigDecimal so_dt;
+	private String so_dt;
 	private int id_nkhau;
 	private Date ngay_sinh;
 	private String gioitinh;
-	public nhan_khau(BigDecimal so_cmnd, String ho_ten, String ma_hogd, String noi_lam_viec, BigDecimal so_dt,int idnhk,Date ns,String gt) {
+	public nhan_khau(BigDecimal so_cmnd, String ho_ten, String ma_hogd, String noi_lam_viec, String so_dt,int idnhk,Date ns,String gt) {
 		this.so_cmnd = so_cmnd;
 		this.ho_ten = ho_ten;
 		this.ma_hogd = ma_hogd;
@@ -49,10 +49,10 @@ public class nhan_khau {
 	public void setNoi_lam_viec(String noi_lam_viec) {
 		this.noi_lam_viec = noi_lam_viec;
 	}
-	public BigDecimal getSo_dt() {
+	public String getSo_dt() {
 		return so_dt;
 	}
-	public void setSo_dt(BigDecimal so_dt) {
+	public void setSo_dt(String so_dt) {
 		this.so_dt = so_dt;
 	}
 	public int getId_nkhau() {

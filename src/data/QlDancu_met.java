@@ -52,7 +52,7 @@ public class QlDancu_met {
 				nk.setMa_hogd(res.getString(3));
 				nk.setNoi_lam_viec(res.getString(4));
 				nk.setSo_cmnd(res.getBigDecimal(2));
-				nk.setSo_dt(res.getBigDecimal(5));
+				nk.setSo_dt(res.getString(5));
 				nk.setHo_ten(res.getString(6));
 				nk.setNgay_sinh(res.getDate(7));
 				nk.setGioitinh(res.getString(8));
