@@ -326,6 +326,59 @@ public class ttkhaibao_mt {
 
 		return list_ttcachly;
 	}
+	public static List<ttkhaibao> findbyallkb(String a){
+		String sql="select ma_khai_bao,nhan_khau.ID_nhan_khau,ho_ten,tinh_trang_sk,lich_su_di_lai,thoi_gian_khai_bao "
+				+ " from thong_tin_khai_bao join nhan_khau on thong_tin_khai_bao.ID_nhan_khau=nhan_khau.ID_nhan_khau  "
+				+ " where nhan_khau.ID_nhan_khau = "+a+" or ma_khai_bao like '%"+a+"%' or ho_ten like N'%"+a+"%' order by thoi_gian_khai_bao asc ";
+		String sql2="select ma_khai_bao,nhan_khau.ID_nhan_khau,ho_ten,tinh_trang_sk,lich_su_di_lai,thoi_gian_khai_bao  "
+				+ " from thong_tin_khai_bao join nhan_khau on thong_tin_khai_bao.ID_nhan_khau=nhan_khau.ID_nhan_khau  "
+				+ " where ma_khai_bao like '%"+a+"%' or ho_ten like N'%"+a+"%' order by thoi_gian_khai_bao asc";
+		Statement stt;
+		ResultSet res;
+		List<ttkhaibao> listkb=new ArrayList<>();
+		try {
+			stt=ConnectDB.toconnection().createStatement();
+			res=stt.executeQuery(sql);
+			while(res.next()) {
+				ttkhaibao vd=new ttkhaibao();
+				vd.setId_nk(res.getInt(2));
+				vd.setHoten(res.getString(3));
+				vd.setTuoi(calYearold(vd.getId_nk()));
+				vd.setTinhtrang_sk(res.getString(4));
+				vd.setMa_kb(res.getString(1));
+				vd.setLichsu_dilai(res.getString(5));
+				vd.setNgaykhaibao(res.getDate(6));
+				listkb.add(vd);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			try {
+				Statement stm=ConnectDB.toconnection().createStatement();
+				res=stm.executeQuery(sql2);
+				while(res.next()) {
+					ttkhaibao vd=new ttkhaibao();
+					vd.setId_nk(res.getInt(2));
+					vd.setHoten(res.getString(3));
+					vd.setTuoi(calYearold(vd.getId_nk()));
+					vd.setTinhtrang_sk(res.getString(4));
+					vd.setMa_kb(res.getString(1));
+					vd.setLichsu_dilai(res.getString(5));
+					vd.setNgaykhaibao(res.getDate(6));
+					listkb.add(vd);
+				}
+				stm.close();
+				res.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			//e.printStackTrace();
+			
+		}
+		return listkb;
+	}
 	}
 	
 	
