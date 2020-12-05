@@ -19,6 +19,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
+import javax.swing.JLabel;
+import java.awt.Color;
 
 public class QLDancu extends JPanel {
 	private JTable table;
@@ -80,6 +82,12 @@ public class QLDancu extends JPanel {
 		scrollpane.setBounds(10,60,1085,545);
 		scrollpane.setViewportView(table);
 		add(scrollpane);
+		
+		JLabel lblNewLabel = new JLabel("Danh sách các nhân khẩu ,hộ gia đinh thuộc phường Bách Khoa");
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel.setBounds(212, 6, 606, 39);
+		add(lblNewLabel);
 //		add(table);
 
 		

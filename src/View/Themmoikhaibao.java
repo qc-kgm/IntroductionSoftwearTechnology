@@ -1,8 +1,5 @@
 	package View;
 
-	import java.awt.BorderLayout;
-	import java.awt.EventQueue;
-
 	import javax.swing.JFrame;
 	import javax.swing.JPanel;
 	import javax.swing.border.EmptyBorder;
@@ -15,15 +12,15 @@ import data.ttkhaibao_mt;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.FlowLayout;
-	import javax.swing.BoxLayout;
-	import javax.swing.JTextField;
-	import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 	import javax.swing.JButton;
 	import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+
+import com.toedter.calendar.JDateChooser;
 
 	public class Themmoikhaibao extends JFrame {
 
@@ -121,7 +118,7 @@ import java.awt.event.MouseEvent;
 			txtkhaibao = new JTextField();
 			txtkhaibao.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			txtkhaibao.setColumns(10);
-			txtkhaibao.setBounds(283, 340, 319, 36);
+			txtkhaibao.setBounds(638, 183, 51, 36);
 			contentPane.add(txtkhaibao);
 			
 			txtlichsu = new JTextField();
@@ -152,6 +149,10 @@ import java.awt.event.MouseEvent;
 			txtmakb.setColumns(10);
 			txtmakb.setBounds(283, 243, 319, 36);
 			contentPane.add(txtmakb);
+			
+			JDateChooser dateChooser = new JDateChooser();
+			dateChooser.setBounds(283, 340, 319, 36);
+			contentPane.add(dateChooser);
 			txtid.getDocument().addDocumentListener(new DocumentListener() {
 				
 				@Override
@@ -203,19 +204,20 @@ import java.awt.event.MouseEvent;
 						ex.setHoten(txthoten.getText().trim());
 						ex.setId_nk(Integer.parseInt(txtid.getText().trim()));
 						ex.setLichsu_dilai(txtlichsu.getText().trim());
-						ex.setNgaykhaibao(java.sql.Date.valueOf(txtkhaibao.getText().trim()));
+						String dateinput= new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
+						ex.setNgaykhaibao(java.sql.Date.valueOf(dateinput));
 						ex.setTinhtrang_sk(txttinhtrang.getText().trim());
 						ex.setMa_kb(txtmakb.getText().trim());
 						ttkhaibao_mt.Insertkhaibao(ex);
-//						JOptionPane.showMessageDialog(null, "Thêm khai báo thành công");
 						Thongtinkhaibao.updatetable();
 						dispose();
 						
 						
 					} catch (Exception e2) {
 						// TODO: handle exception
-//						JOptionPane.showMessageDialog(null, "Thêm khai báo thất bại","Error",JOptionPane.WARNING_MESSAGE);
-
+						JOptionPane.showMessageDialog(null, "Thêm khai báo thất bại","Error",JOptionPane.WARNING_MESSAGE);
+						String dateinput= new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
+						System.out.println("\n"+dateinput+"\n");
 					}
 					
 				}

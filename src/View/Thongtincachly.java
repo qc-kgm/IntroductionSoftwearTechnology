@@ -48,6 +48,16 @@ public class Thongtincachly extends JPanel {
 		btnnew.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnnew.setBounds(1005, 50, 85, 48);
 		add(btnnew);
+		JButton btnedit = new JButton("Edit");
+		btnedit.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnedit.setBounds(1005, 111, 85, 48);
+		btnedit.setEnabled(false);
+		add(btnedit);
+		JButton btnketqua = new JButton("KQ test");
+		btnketqua.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnketqua.setBounds(1005, 169, 85, 48);
+		btnketqua.setEnabled(false);
+		add(btnketqua);
 		
 		table=new JTable(){
 	         public boolean editCellAt(int row, int column, java.util.EventObject e) {
@@ -73,6 +83,8 @@ public class Thongtincachly extends JPanel {
 					now[7]=model.getValueAt(selectedRow, 3).toString();
 					if(model.getValueAt(selectedRow, 7) != null) now[8]=model.getValueAt(selectedRow, 7).toString();
 					else now[8]=null;
+					btnedit.setEnabled(true);
+					btnketqua.setEnabled(true);
 					
 				}
 			}
@@ -80,23 +92,18 @@ public class Thongtincachly extends JPanel {
 //		List<ttcachly> list_cly=ttkhaibao_mt.getttcachly();
 //		table.setModel(ttkhaibao_mt.getTableModel_cl(list_cly, columns_cly));
 		updatetable();
-		JButton btnedit = new JButton("Edit");
-		btnedit.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnedit.setBounds(1005, 111, 85, 48);
-		add(btnedit);
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 50, 979, 520);
 		scrollPane.setViewportView(table);
 		add(scrollPane);
 		
-		JButton btnketqua = new JButton("KQ test");
+		
 		btnketqua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnketqua.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnketqua.setBounds(1005, 169, 85, 48);
-		add(btnketqua);
+
 		
 		txtfind = new JTextField();
 		txtfind.setBounds(126, 9, 231, 31);
@@ -149,6 +156,18 @@ public class Thongtincachly extends JPanel {
 //				}
 //				else updatetable();
 				
+			}
+		});
+		btnketqua.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(now[3]!=null) {
+				
+				Ketquatest.maso=now[3];
+				Ketquatest.labelten=now[1];
+				Ketquatest kq=new Ketquatest();
+				kq.setVisible(true);
+				}
 			}
 		});
 	}

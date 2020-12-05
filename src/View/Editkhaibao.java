@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +20,7 @@ import javax.swing.event.DocumentListener;
 
 import Object.ttkhaibao;
 import data.ttkhaibao_mt;
+import com.toedter.calendar.JDateChooser;
 
 public class Editkhaibao extends JFrame {
 	private JPanel contentPane;
@@ -29,6 +32,7 @@ public class Editkhaibao extends JFrame {
 	private JTextField txtlichsu;
 	private JTextField txtcmnd;
 	private JTextField txtmakb;
+	private JDateChooser dateChooser;
 
 
 	public Editkhaibao() {
@@ -112,8 +116,8 @@ public class Editkhaibao extends JFrame {
 		txtkhaibao = new JTextField();
 		txtkhaibao.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtkhaibao.setColumns(10);
-		txtkhaibao.setBounds(283, 340, 319, 36);
-		contentPane.add(txtkhaibao);
+		txtkhaibao.setBounds(669, 184, 33, 36);
+		//contentPane.add(txtkhaibao);
 		
 		txtlichsu = new JTextField();
 		txtlichsu.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -144,6 +148,10 @@ public class Editkhaibao extends JFrame {
 		txtmakb.setColumns(10);
 		txtmakb.setBounds(283, 243, 319, 36);
 		contentPane.add(txtmakb);
+		
+		dateChooser = new JDateChooser();
+		dateChooser.setBounds(281, 340, 321, 36);
+		contentPane.add(dateChooser);
 //		txtid.getDocument().addDocumentListener(new DocumentListener() {
 //			
 //			@Override
@@ -195,7 +203,9 @@ public class Editkhaibao extends JFrame {
 					ex.setHoten(txthoten.getText().trim());
 					ex.setId_nk(Integer.parseInt(txtid.getText().trim()));
 					ex.setLichsu_dilai(txtlichsu.getText().trim());
-					ex.setNgaykhaibao(java.sql.Date.valueOf(txtkhaibao.getText().trim()));
+					String dateinput= new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
+					ex.setNgaykhaibao(java.sql.Date.valueOf(dateinput));
+					//ex.setNgaykhaibao(java.sql.Date.valueOf(txtkhaibao.getText().trim()));
 					ex.setTinhtrang_sk(txttinhtrang.getText().trim());
 					ex.setMa_kb(txtmakb.getText().trim());
 					ttkhaibao_mt.updatekhaibao(ex);
@@ -221,7 +231,16 @@ public class Editkhaibao extends JFrame {
 		txttuoi.setText(d);
 		txtmakb.setText(e);
 		txttinhtrang.setText(f);
-		txtkhaibao.setText(g);
+		//txtkhaibao.setText(g);
+		try {
+			java.util.Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(g);
+			dateChooser.setDate(date1);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			System.out.println("loi get ngay vao calendar");
+		}
+		
 		txtlichsu.setText(k);
 	}
 	}

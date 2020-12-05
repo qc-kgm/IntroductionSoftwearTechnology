@@ -8,14 +8,19 @@ import java.util.List;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
+import Object.ttcachly;
 import Object.ttkhaibao;
 import data.ttkhaibao_mt;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class Thongtinkhaibao extends JPanel {
 
@@ -27,6 +32,7 @@ public class Thongtinkhaibao extends JPanel {
 	};
 	private static JTable table;
 	private static String[] now=new String[8];
+	private JTextField txtfind;
 	public Thongtinkhaibao() {
 		setLayout(null);
 		
@@ -42,6 +48,7 @@ public class Thongtinkhaibao extends JPanel {
 		JButton btnedit = new JButton("Edit");
 		btnedit.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnedit.setBounds(1005, 123, 85, 47);
+		btnedit.setEnabled(false);
 		add(btnedit);
 		
 		table=new JTable(){
@@ -65,7 +72,7 @@ public class Thongtinkhaibao extends JPanel {
 					now[5]=model.getValueAt(selectedRow, 4).toString();
 					now[6]=model.getValueAt(selectedRow, 6).toString();
 					now[7]=model.getValueAt(selectedRow, 5).toString();
-					
+					btnedit.setEnabled(true);
 				}
 			}
 		});
@@ -76,6 +83,16 @@ public class Thongtinkhaibao extends JPanel {
 		scrollPane.setBounds(10, 51, 985, 514);
 		scrollPane.setViewportView(table);
 		add(scrollPane);
+		
+		JLabel lblNewLabel = new JLabel("Tìm kiếm");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel.setBounds(69, 10, 76, 30);
+		add(lblNewLabel);
+		
+		txtfind = new JTextField();
+		txtfind.setColumns(10);
+		txtfind.setBounds(155, 10, 231, 31);
+		add(txtfind);
 		btnNew.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -90,7 +107,46 @@ public class Thongtinkhaibao extends JPanel {
 				editkb.setVisible(true);
 			}
 		});
+		
+txtfind.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				if(txtfind.getText().trim().length()!=0) {
+					List<ttkhaibao> list_kb=ttkhaibao_mt.findbyallkb(txtfind.getText().trim());
+					table.setModel(ttkhaibao_mt.getTableModel_kb(list_kb, columns_kb));
+				}
+				else updatetable();
+				
+				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				if(txtfind.getText().trim().length()!=0) {
+					List<ttkhaibao> list_kb=ttkhaibao_mt.findbyallkb(txtfind.getText().trim());
+					table.setModel(ttkhaibao_mt.getTableModel_kb(list_kb, columns_kb));
+				}
+				else updatetable();
+				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+//				if(txtfind.getText().trim().length()!=0) {
+//					List<ttcachly> list_cly=ttkhaibao_mt.findbyallcl(txtfind.getText().trim());
+//					table.setModel(ttkhaibao_mt.getTableModel_cl(list_cly, columns_cly));
+//				}
+//				else updatetable();
+				
+			}
+		});
+		
 	}
+	
 	public static void updatetable() {
 		List<ttkhaibao> list_kb=ttkhaibao_mt.getttkhaibao();
 		table.setModel(ttkhaibao_mt.getTableModel_kb(list_kb, columns_kb));

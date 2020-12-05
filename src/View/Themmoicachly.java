@@ -24,8 +24,10 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JRadioButton;
+import com.toedter.calendar.JDateChooser;
 
 public class Themmoicachly extends JFrame {
 
@@ -151,17 +153,17 @@ public class Themmoicachly extends JFrame {
 		txtmacl.setBounds(235, 239, 288, 36);
 		contentPane.add(txtmacl);
 		
-		txtbatdau = new JTextField();
-		txtbatdau.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		txtbatdau.setColumns(10);
-		txtbatdau.setBounds(235, 428, 288, 36);
-		contentPane.add(txtbatdau);
-		
-		txtketthuc = new JTextField();
-		txtketthuc.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		txtketthuc.setColumns(10);
-		txtketthuc.setBounds(235, 474, 288, 36);
-		contentPane.add(txtketthuc);
+//		txtbatdau = new JTextField();
+//		txtbatdau.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		txtbatdau.setColumns(10);
+//		txtbatdau.setBounds(680, 193, 69, 36);
+//		contentPane.add(txtbatdau);
+//		
+//		txtketthuc = new JTextField();
+//		txtketthuc.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		txtketthuc.setColumns(10);
+//		txtketthuc.setBounds(707, 244, 52, 36);
+//		contentPane.add(txtketthuc);
 		
 		JButton btnSave = new JButton("Save");
 		
@@ -193,14 +195,32 @@ public class Themmoicachly extends JFrame {
 		ButtonGroup group= new ButtonGroup();
 		group.add(no);
 		group.add(yes);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(235, 422, 288, 36);
+		contentPane.add(dateChooser);
+		
+		JDateChooser dateChooser_kt = new JDateChooser();
+		dateChooser_kt.setBounds(235, 473, 288, 36);
+		contentPane.add(dateChooser_kt);
 		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 				ex.setId_nk(Integer.parseInt(txtid.getText().toString().trim()));
-				ex.setBatdau(java.sql.Date.valueOf(txtbatdau.getText().toString().trim()));
-				if(txtketthuc.getText().trim().equals("")) ex.setKetthuc(null);
-				else ex.setKetthuc(java.sql.Date.valueOf(txtketthuc.getText().toString().trim()));
+				String dateinput= new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
+				ex.setBatdau(java.sql.Date.valueOf(dateinput));
+//				ex.setBatdau(java.sql.Date.valueOf(txtbatdau.getText().toString().trim()));
+//				if(txtketthuc.getText().trim().equals("")) ex.setKetthuc(null);
+//				else ex.setKetthuc(java.sql.Date.valueOf(txtketthuc.getText().toString().trim()));
+				try {
+					String dateouput=new SimpleDateFormat("yyyy-MM-dd").format(dateChooser_kt.getDate());
+					ex.setKetthuc(java.sql.Date.valueOf(dateouput));
+				} catch (Exception e2) {
+					// TODO: handle exception
+					ex.setKetthuc(null);
+				}
+				
 				ex.setNoicachly(txtnoicl.getText().toString().trim());
 				ex.setHoten(txthoten.getText().trim());
 				ex.setMa_cachly(txtmacl.getText().trim());

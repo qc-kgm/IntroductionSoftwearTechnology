@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 import Object.ttcachly;
 import data.ttkhaibao_mt;
+import com.toedter.calendar.JDateChooser;
 
 public class Editttcachly extends JFrame {
 
@@ -28,10 +32,10 @@ public class Editttcachly extends JFrame {
 	private JTextField txtnoicl;
 	private JTextField txtmucdo;
 	private JTextField txtmacl;
-	private JTextField txtbatdau;
-	private JTextField txtketthuc;
 	private JRadioButton no;
 	private JRadioButton yes;
+	private JDateChooser dateChooser ;
+	private JDateChooser dateChooser_kt; 
 	private static ttcachly ex=new ttcachly();
 	/**
 	 * Launch the application.
@@ -140,22 +144,11 @@ public class Editttcachly extends JFrame {
 		contentPane.add(txtmucdo);
 		
 		txtmacl = new JTextField();
+		txtmacl.setEditable(false);
 		txtmacl.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtmacl.setColumns(10);
 		txtmacl.setBounds(301, 176, 355, 36);
 		contentPane.add(txtmacl);
-		
-		txtbatdau = new JTextField();
-		txtbatdau.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		txtbatdau.setColumns(10);
-		txtbatdau.setBounds(301, 381, 355, 36);
-		contentPane.add(txtbatdau);
-		
-		txtketthuc = new JTextField();
-		txtketthuc.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		txtketthuc.setColumns(10);
-		txtketthuc.setBounds(301, 434, 355, 36);
-		contentPane.add(txtketthuc);
 		
 		JButton btnSave = new JButton("Save");
 		
@@ -187,14 +180,35 @@ public class Editttcachly extends JFrame {
 		ButtonGroup group= new ButtonGroup();
 		group.add(no);
 		group.add(yes);
+		
+		dateChooser = new JDateChooser();
+		dateChooser.setBounds(301, 377, 355, 36);
+		contentPane.add(dateChooser);
+		
+		dateChooser_kt = new JDateChooser();
+		dateChooser_kt.setBounds(301, 430, 355, 36);
+		contentPane.add(dateChooser_kt);
 		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 				ex.setId_nk(Integer.parseInt(txtid.getText().toString().trim()));
-				ex.setBatdau(java.sql.Date.valueOf(txtbatdau.getText().toString().trim()));
-				if(txtketthuc.getText().trim().equals("")) ex.setKetthuc(null);
-				else ex.setKetthuc(java.sql.Date.valueOf(txtketthuc.getText().toString().trim()));
+//				if(txtketthuc.getText().trim().equals("")) ex.setKetthuc(null);
+//				else ex.setKetthuc(java.sql.Date.valueOf(txtketthuc.getText().toString().trim()));
+				
+//				ex.setBatdau(java.sql.Date.valueOf(txtbatdau.getText().toString().trim()));
+//				if(txtketthuc.getText().trim().equals("")) ex.setKetthuc(null);
+//				else ex.setKetthuc(java.sql.Date.valueOf(txtketthuc.getText().toString().trim()));
+				try {
+					String dateouput=new SimpleDateFormat("yyyy-MM-dd").format(dateChooser_kt.getDate());
+					String dateinput= new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
+					ex.setKetthuc(java.sql.Date.valueOf(dateouput));
+					ex.setBatdau(java.sql.Date.valueOf(dateinput));
+				} catch (Exception e2) {
+					// TODO: handle exception
+					ex.setKetthuc(null);
+					ex.setBatdau(null);
+				}
 				ex.setNoicachly(txtnoicl.getText().toString().trim());
 				ex.setHoten(txthoten.getText().trim());
 				ex.setMa_cachly(txtmacl.getText().trim());
@@ -223,8 +237,21 @@ public class Editttcachly extends JFrame {
 		txtnoicl.setText(e);
 		txtmucdo.setText(f);
 		if(g.equals("yes")) yes.setSelected(true); else no.setSelected(true);
-		txtbatdau.setText(k);
-		if(l != null) txtketthuc.setText(l);
+		try {
+			java.util.Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(k);
+			dateChooser.setDate(date1);
+			
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			System.out.println("loi get ngay vao calendar");
+		}
+		try {
+			java.util.Date date2=new SimpleDateFormat("yyyy-MM-dd").parse(l);
+			dateChooser_kt.setDate(date2);
+		} catch (Exception e2) {
+			// TODO: handle exception
+			System.out.println("loi get ngay vao calendar");
+		}
 	}
-
 }

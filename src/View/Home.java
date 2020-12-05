@@ -37,7 +37,7 @@ public class Home extends JFrame {
 		
 		ConnectDB.toconnection();
 		
-		JLabel lblNewLabel = new JLabel("                            UBND Xã ...............");
+		JLabel lblNewLabel = new JLabel("                                                 UBND Phường BÁCH KHOA");
 		lblNewLabel.setOpaque(true);
 		lblNewLabel.setBackground(Color.CYAN);
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 36));
@@ -51,36 +51,36 @@ public class Home extends JFrame {
 		contentPane.add(panelMenu);
 		panelMenu.setLayout(null);
 		
-		JLabel trang_chu = new JLabel("HOME");
+		JLabel trang_chu = new JLabel("              HOME");
 		trang_chu.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		trang_chu.setBackground(Color.GREEN);
+		trang_chu.setBackground(new Color(100, 149, 237));
 		trang_chu.setOpaque(true);
-		trang_chu.setFont(new Font("Arial", Font.BOLD, 16));
+		trang_chu.setFont(new Font("Arial", Font.BOLD, 20));
 		trang_chu.setBounds(0, 39, 252, 97);
 		panelMenu.add(trang_chu);
 		
-		JLabel dan_cu = new JLabel("QL DÂN CƯ");
+		JLabel dan_cu = new JLabel("            QL DÂN CƯ");
 		dan_cu.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		dan_cu.setOpaque(true);
-		dan_cu.setBackground(Color.GREEN);
+		dan_cu.setBackground(new Color(100, 149, 237));
 		dan_cu.setToolTipText("");
-		dan_cu.setFont(new Font("Arial", Font.BOLD, 16));
+		dan_cu.setFont(new Font("Arial", Font.BOLD, 20));
 		dan_cu.setBounds(0, 161, 252, 97);
 		panelMenu.add(dan_cu);
 		
-		JLabel qlcovid = new JLabel("QL COVID");
+		JLabel qlcovid = new JLabel("           QL COVID");
 		qlcovid.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		qlcovid.setBackground(Color.GREEN);
+		qlcovid.setBackground(new Color(100, 149, 237));
 		qlcovid.setOpaque(true);
-		qlcovid.setFont(new Font("Arial", Font.BOLD, 16));
+		qlcovid.setFont(new Font("Arial", Font.BOLD, 20));
 		qlcovid.setBounds(0, 280, 252, 97);
 		panelMenu.add(qlcovid);
 		
-		JLabel thong_ke = new JLabel("THỐNG KÊ COVID");
+		JLabel thong_ke = new JLabel("     THỐNG KÊ COVID");
 		thong_ke.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		thong_ke.setBackground(Color.GREEN);
+		thong_ke.setBackground(new Color(100, 149, 237));
 		thong_ke.setOpaque(true);
-		thong_ke.setFont(new Font("Arial", Font.BOLD, 16));
+		thong_ke.setFont(new Font("Arial", Font.BOLD, 20));
 		thong_ke.setBounds(0, 407, 252, 97);
 		panelMenu.add(thong_ke);
 		
