@@ -54,7 +54,7 @@ public class Thongtincachly extends JPanel {
 		btnedit.setEnabled(false);
 		add(btnedit);
 		JButton btnketqua = new JButton("KQ test");
-		btnketqua.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnketqua.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnketqua.setBounds(1005, 169, 85, 48);
 		btnketqua.setEnabled(false);
 		add(btnketqua);
