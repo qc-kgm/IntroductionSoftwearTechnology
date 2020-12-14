@@ -37,7 +37,7 @@ public class Home extends JFrame {
 		
 		ConnectDB.toconnection();
 		
-		JLabel lblNewLabel = new JLabel("                                                 UBND Phường BÁCH KHOA");
+		JLabel lblNewLabel = new JLabel("                          Ban quản lý tổ dân phố 7 phường La Khê");
 		lblNewLabel.setOpaque(true);
 		lblNewLabel.setBackground(Color.CYAN);
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 36));
