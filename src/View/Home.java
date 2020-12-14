@@ -28,6 +28,7 @@ public class Home extends JFrame {
 	 * Create the frame.
 	 */
 	public Home() {
+		setTitle("Quản lí Covid-19]");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(30, 30, 1378, 767);
 		contentPane = new JPanel();
@@ -100,6 +101,7 @@ public class Home extends JFrame {
 		menu[2]= new Menu(2,qlcovid);
 		menu[3]=new Menu(3,thong_ke);
 		ChuyenManHinh switchscreen =new ChuyenManHinh(View);
+		switchscreen.setView(new trangchu());
 		switchscreen.setEventMenu(menu);
 	}
 }

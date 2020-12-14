@@ -157,9 +157,13 @@ public class Ketquatest extends JFrame {
 				kq.setThoigian(java.sql.Date.valueOf(dateinput));
 				int a= ketquatest_mt.insertkq(kq);
 				if(a==1) {
-					txtlantest.setText(null);
+					//txtlantest.setText(null);
 					//txtthoigian.setText(null);
-					yes.setSelected(false);no.setSelected(false);
+					yes.setSelected(false);
+					no.setSelected(false);
+					int t=Integer.parseInt((String)txtlantest.getText())+1;
+					m=String.valueOf(t);
+					txtlantest.setText(m);
 					updatetale();
 				}
 				} catch (Exception e2) {
