@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import Object.Menu;
 import View.QLDancu;
 import View.QLcovid;
+import View.ThongkeCovid;
+import View.trangchu;
 
 import javax.swing.JPanel;
 
@@ -41,6 +43,7 @@ public class ChuyenManHinh {
 //				a[0].getJpn().setBackground(new Color(100,100,100));
 //				a[0].getJlb().setBackground(new Color(100,100,100));
 //				setView(new QLDancu());
+				setView(new trangchu());
 			}
 		});
 		a[1].getLabel().addMouseListener(new MouseAdapter() {
@@ -75,9 +78,9 @@ public class ChuyenManHinh {
 //				a[1].getJpn().setBackground(new Color(100,100,100));
 //				a[1].getJlb().setBackground(new Color(100,100,100));
 				//setView(new QLThuthuView());
+				setView(new ThongkeCovid());
 			}
 		});
-
 	}
 	public void markColorLabel(int i,Menu []m) {
 		for(int j=0;j<4;j++) {
