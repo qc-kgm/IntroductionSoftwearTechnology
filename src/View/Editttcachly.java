@@ -200,14 +200,18 @@ public class Editttcachly extends JFrame {
 //				if(txtketthuc.getText().trim().equals("")) ex.setKetthuc(null);
 //				else ex.setKetthuc(java.sql.Date.valueOf(txtketthuc.getText().toString().trim()));
 				try {
-					String dateouput=new SimpleDateFormat("yyyy-MM-dd").format(dateChooser_kt.getDate());
 					String dateinput= new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
-					ex.setKetthuc(java.sql.Date.valueOf(dateouput));
 					ex.setBatdau(java.sql.Date.valueOf(dateinput));
 				} catch (Exception e2) {
 					// TODO: handle exception
-					ex.setKetthuc(null);
 					ex.setBatdau(null);
+				}
+				try {
+					String dateouput=new SimpleDateFormat("yyyy-MM-dd").format(dateChooser_kt.getDate());
+					ex.setKetthuc(java.sql.Date.valueOf(dateouput));
+				} catch (Exception e2) {
+					// TODO: handle exception
+					ex.setKetthuc(null);
 				}
 				ex.setNoicachly(txtnoicl.getText().toString().trim());
 				ex.setHoten(txthoten.getText().trim());
