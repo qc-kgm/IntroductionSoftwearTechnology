@@ -77,6 +77,34 @@ public class ttkhaibao_mt {
 		return list_ttcachly;
 	}
 	
+	public static List<ttcachly> gettkcovid(){
+		Statement stt;
+		ResultSet res;
+		String sql=" select ma_so_cach_ly,nhan_khau.ID_nhan_khau,ho_ten,muc_do_cach_ly "
+				+ " from thong_tin_cach_li join nhan_khau on thong_tin_cach_li.ID_nhan_khau=nhan_khau.ID_nhan_khau ";
+		List<ttcachly> list_tkcovid=new ArrayList<>();
+		try {
+			stt=ConnectDB.toconnection().createStatement();
+			res= stt.executeQuery(sql);
+			while(res.next()) {
+				ttcachly vd=new ttcachly();
+				vd.setMa_cachly(res.getString(1));
+				vd.setId_nk(res.getInt(2));
+				vd.setHoten(res.getString(3));
+				vd.setMucdocachly(res.getString(4));
+				list_tkcovid.add(vd);
+			}
+			stt.close();
+			res.close();
+		}
+		catch (Exception e) {
+			System.out.println("Loi khi get list thong ke covid");
+			e.printStackTrace();
+		}
+
+		return list_tkcovid;
+	}
+	
 	public static DefaultTableModel getTableModel_kb(List<ttkhaibao> khaibao,String []listColumns) {
 		DefaultTableModel modeldf=new DefaultTableModel();
 		modeldf.setColumnIdentifiers(listColumns);
@@ -117,6 +145,24 @@ public class ttkhaibao_mt {
 			modeldf.addRow(obj);
 		}
 		System.out.println("add thanh cong list tt cach ly");
+		return modeldf;
+	}
+	
+	public static DefaultTableModel getTableModel_tk(List<ttcachly> thongke,String []listColumns) {
+		DefaultTableModel modeldf=new DefaultTableModel();
+		modeldf.setColumnIdentifiers(listColumns);
+		ttcachly vd=null;
+		Object []obj;
+		for(int i=0;i<thongke.size();i++) {
+			vd=thongke.get(i);
+			obj=new Object[listColumns.length];
+			obj[0]=vd.getMa_cachly();
+			obj[1]=vd.getId_nk();
+			obj[2]=vd.getHoten();
+			obj[3]=vd.getMucdocachly();
+			modeldf.addRow(obj);
+		}
+		System.out.println("add thanh cong list tk covid");
 		return modeldf;
 	}
 	
