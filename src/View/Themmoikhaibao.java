@@ -29,7 +29,6 @@ import com.toedter.calendar.JDateChooser;
 		private JTextField txthoten;
 		private JTextField txttuoi;
 		private JTextField txttinhtrang;
-		private JTextField txtkhaibao;
 		private JTextField txtlichsu;
 		private JTextField txtcmnd;
 		private JTextField txtmakb;
@@ -113,13 +112,7 @@ import com.toedter.calendar.JDateChooser;
 			txttinhtrang.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			txttinhtrang.setColumns(10);
 			txttinhtrang.setBounds(283, 294, 319, 36);
-			contentPane.add(txttinhtrang);
-			
-			txtkhaibao = new JTextField();
-			txtkhaibao.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			txtkhaibao.setColumns(10);
-			txtkhaibao.setBounds(638, 183, 51, 36);
-			contentPane.add(txtkhaibao);
+			contentPane.add(txttinhtrang);    
 			
 			txtlichsu = new JTextField();
 			txtlichsu.setFont(new Font("Tahoma", Font.PLAIN, 16));

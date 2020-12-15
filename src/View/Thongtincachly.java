@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Thongtincachly extends JPanel {
 
@@ -48,14 +49,19 @@ public class Thongtincachly extends JPanel {
 		btnnew.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnnew.setBounds(1005, 50, 85, 48);
 		add(btnnew);
+		JButton btndelete = new JButton("Delete");
+		btndelete.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btndelete.setBounds(1005, 108, 85, 48);
+		btndelete.setEnabled(false);
+		add(btndelete);
 		JButton btnedit = new JButton("Edit");
 		btnedit.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnedit.setBounds(1005, 111, 85, 48);
+		btnedit.setBounds(1005, 168, 85, 48);
 		btnedit.setEnabled(false);
 		add(btnedit);
 		JButton btnketqua = new JButton("KQ test");
 		btnketqua.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnketqua.setBounds(1005, 169, 85, 48);
+		btnketqua.setBounds(1005, 226, 85, 48);
 		btnketqua.setEnabled(false);
 		add(btnketqua);
 		
@@ -85,6 +91,7 @@ public class Thongtincachly extends JPanel {
 					else now[8]=null;
 					btnedit.setEnabled(true);
 					btnketqua.setEnabled(true);
+					btndelete.setEnabled(true);
 					
 				}
 			}
@@ -114,12 +121,31 @@ public class Thongtincachly extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setBounds(40, 9, 76, 30);
 		add(lblNewLabel);
+		
+
 		btnedit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Editttcachly editcl= new Editttcachly();
 				editcl.hienthinoidung(now[0], now[1], now[2], now[3], now[4], now[5], now[6], now[7], now[8]);
 				editcl.setVisible(true);
+			}
+		});
+
+		btndelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int a= JOptionPane.showConfirmDialog(null, "Xóa thông tin cách ly mã "+now[3]+" trong danh sách", "Question",JOptionPane.YES_NO_OPTION);
+//				System.out.println("Gia tri a = "+a);
+//				chọn yes -> a=0 ,no a=1
+				if(a==0) {
+					ttkhaibao_mt.deletettcachly(now[3]);
+					updatetable();
+				}
+				
+				
+				
+				
 			}
 		});
 		txtfind.getDocument().addDocumentListener(new DocumentListener() {
