@@ -42,7 +42,6 @@ public class ChuyenManHinh {
 				markColorLabel(0, a);
 //				a[0].getJpn().setBackground(new Color(100,100,100));
 //				a[0].getJlb().setBackground(new Color(100,100,100));
-//				setView(new QLDancu());
 				setView(new trangchu());
 			}
 		});
@@ -77,10 +76,10 @@ public class ChuyenManHinh {
 				markColorLabel(3, a);
 //				a[1].getJpn().setBackground(new Color(100,100,100));
 //				a[1].getJlb().setBackground(new Color(100,100,100));
-				//setView(new QLThuthuView());
 				setView(new ThongkeCovid());
 			}
 		});
+
 	}
 	public void markColorLabel(int i,Menu []m) {
 		for(int j=0;j<4;j++) {

@@ -151,7 +151,9 @@ public class Themmoicachly extends JFrame {
 		txtmacl.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtmacl.setColumns(10);
 		txtmacl.setBounds(235, 239, 288, 36);
+		txtmacl.setEditable(false);
 		contentPane.add(txtmacl);
+		txtmacl.setText(String.valueOf(ttkhaibao_mt.getthelastttcachly()));
 		
 //		txtbatdau = new JTextField();
 //		txtbatdau.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -223,7 +225,7 @@ public class Themmoicachly extends JFrame {
 				
 				ex.setNoicachly(txtnoicl.getText().toString().trim());
 				ex.setHoten(txthoten.getText().trim());
-				ex.setMa_cachly(txtmacl.getText().trim());
+				ex.setMa_cachly(Integer.parseInt(txtmacl.getText().trim()));
 				ex.setMucdocachly(txtmucdo.getText().trim());
 				if(no.isSelected()) ex.setDatest(false); 
 				if(yes.isSelected()) ex.setDatest(true);

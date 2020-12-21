@@ -83,10 +83,10 @@ public class QLDancu extends JPanel {
 		scrollpane.setViewportView(table);
 		add(scrollpane);
 		
-		JLabel lblNewLabel = new JLabel("Danh sách các nhân khẩu ,hộ gia đinh thuộc phường Bách Khoa");
-		lblNewLabel.setForeground(Color.RED);
+		JLabel lblNewLabel = new JLabel("Danh sách các nhân khẩu ,hộ gia đình thuộc tổ dân phố 7-phường La Khê");
+		lblNewLabel.setForeground(Color.MAGENTA);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel.setBounds(212, 6, 606, 39);
+		lblNewLabel.setBounds(148, 6, 721, 39);
 		add(lblNewLabel);
 //		add(table);
 

@@ -45,7 +45,7 @@ public class thongkedata {
 			ResultSet res= stt.executeQuery(sql);
 			while(res.next()) {
 				ttcachly vd=new ttcachly();
-				vd.setMa_cachly(res.getString(1));
+				vd.setMa_cachly(res.getInt(1));
 				vd.setId_nk(res.getInt(2));
 				vd.setHoten(res.getString(3));
 				vd.setBatdau(res.getDate(4));

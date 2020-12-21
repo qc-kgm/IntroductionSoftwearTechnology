@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 import Object.ho_gd;
 import Object.nhan_khau;
 import Object.ttcachly;
@@ -49,14 +48,14 @@ public class ttkhaibao_mt {
 		Statement stt;
 		ResultSet res;
 		String sql=" select ma_so_cach_ly,nhan_khau.ID_nhan_khau,ho_ten,thoi_gian_bat_dau,muc_do_cach_ly,noi_cach_ly,da_test_covid,thoi_gian_ket_thuc "
-				+ " from thong_tin_cach_li inner join nhan_khau on thong_tin_cach_li.ID_nhan_khau=nhan_khau.ID_nhan_khau order by thoi_gian_bat_dau asc ";
+				+ " from thong_tin_cach_li inner join nhan_khau on thong_tin_cach_li.ID_nhan_khau=nhan_khau.ID_nhan_khau order by ma_so_cach_ly asc ";
 		List<ttcachly> list_ttcachly=new ArrayList<>();
 		try {
 			stt=ConnectDB.toconnection().createStatement();
 			res= stt.executeQuery(sql);
 			while(res.next()) {
 				ttcachly vd=new ttcachly();
-				vd.setMa_cachly(res.getString(1));
+				vd.setMa_cachly(res.getInt(1));
 				vd.setId_nk(res.getInt(2));
 				vd.setHoten(res.getString(3));
 				vd.setBatdau(res.getDate(4));
@@ -128,17 +127,17 @@ public class ttkhaibao_mt {
 		String sql="	MERGE INTO thong_tin_cach_li USING "
 				+ "    (SELECT macl=?,batdau=?,mucdo=?,datest=?,id_nk=?, ketthuc=?,noicl=?) AS ne "
 				+ "  ON thong_tin_cach_li.ma_so_cach_ly =ne.macl  WHEN MATCHED THEN "
-				+ "    UPDATE SET ma_so_cach_ly=macl,thoi_gian_bat_dau=batdau,muc_do_cach_ly=mucdo,da_test_covid=datest, "
+				+ "    UPDATE SET thoi_gian_bat_dau=batdau,muc_do_cach_ly=mucdo,da_test_covid=datest, "
 				+ "	ID_nhan_khau=id_nk,thoi_gian_ket_thuc=ketthuc,noi_cach_ly=noicl  WHEN NOT MATCHED THEN "
-				+ "    INSERT (ma_so_cach_ly,thoi_gian_bat_dau,muc_do_cach_ly,da_test_covid, "
-				+ "	ID_nhan_khau,thoi_gian_ket_thuc,noi_cach_ly) VALUES (macl,batdau,mucdo,datest,id_nk,ketthuc,noicl);";
+				+ "    INSERT (thoi_gian_bat_dau,muc_do_cach_ly,da_test_covid, "
+				+ "	ID_nhan_khau,thoi_gian_ket_thuc,noi_cach_ly) VALUES (batdau,mucdo,datest,id_nk,ketthuc,noicl);";
 //		String sql2=" 	MERGE INTO nhan_khau  USING "
 //				+ "  (select hoten=?,cmnd=?,id=?) as ne "
 //				+ "  on nhan_khau.ID_nhan_khau=ne.id when matched then update set so_CMND=cmnd,ho_ten=hoten;";
 		try {
 			PreparedStatement ps=ConnectDB.toconnection().prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
 			//PreparedStatement ps2=ConnectDB.toconnection().prepareStatement(sql2);
-			ps.setString(1, tt.getMa_cachly());
+			ps.setInt(1, tt.getMa_cachly());
 			ps.setString(3, tt.getMucdocachly());
 			ps.setNString(7, tt.getNoicachly());
 			ps.setDate(2, tt.getBatdau());
@@ -272,7 +271,7 @@ public class ttkhaibao_mt {
 	public static List<ttcachly> findbyallcl(String a) {
 		String sql="  select ma_so_cach_ly,nhan_khau.ID_nhan_khau,ho_ten,thoi_gian_bat_dau,muc_do_cach_ly,noi_cach_ly,da_test_covid, "
 				+ "  thoi_gian_ket_thuc from thong_tin_cach_li inner join nhan_khau on thong_tin_cach_li.ID_nhan_khau=nhan_khau.ID_nhan_khau  "
-				+ "   where nhan_khau.ID_nhan_khau = "+a+" or ho_ten like N'%"+a+"%' or ma_so_cach_ly like '%"+a+"%' "
+				+ "   where nhan_khau.ID_nhan_khau = "+a+" or ho_ten like N'%"+a+"%' or ma_so_cach_ly = "+a
 				+ " or muc_do_cach_ly like '%"+a+"%' or noi_cach_ly like N'%"+a+"%' "
 				+ "  order by thoi_gian_bat_dau asc";
 		String sql2=" select ma_so_cach_ly,nhan_khau.ID_nhan_khau,ho_ten,thoi_gian_bat_dau,muc_do_cach_ly,noi_cach_ly,da_test_covid, "
@@ -286,7 +285,7 @@ public class ttkhaibao_mt {
 			res= stt.executeQuery(sql);
 			while(res.next()) {
 				ttcachly vd=new ttcachly();
-				vd.setMa_cachly(res.getString(1));
+				vd.setMa_cachly(res.getInt(1));
 				vd.setId_nk(res.getInt(2));
 				vd.setHoten(res.getString(3));
 				vd.setBatdau(res.getDate(4));
@@ -304,7 +303,7 @@ public class ttkhaibao_mt {
 				res= stm.executeQuery(sql2);
 				while(res.next()) {
 					ttcachly vd=new ttcachly();
-					vd.setMa_cachly(res.getString(1));
+					vd.setMa_cachly(res.getInt(1));
 					vd.setId_nk(res.getInt(2));
 					vd.setHoten(res.getString(3));
 					vd.setBatdau(res.getDate(4));
@@ -378,6 +377,56 @@ public class ttkhaibao_mt {
 			
 		}
 		return listkb;
+	}
+	public static void  delelettkhaibao(String tt) {
+		String sql="delete from thong_tin_khai_bao where ma_khai_bao = '"+tt+"'";
+		try {
+			Statement stm=ConnectDB.toconnection().createStatement();
+			stm.execute(sql);
+			JOptionPane.showMessageDialog(null, "Xóa khai báo thành công");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Xóa khai báo thất bại","Error",JOptionPane.WARNING_MESSAGE);
+			e.printStackTrace();
+			
+		}
+	}
+	public static void  deletettcachly(String tt) {
+		String sql2="delete from ket_qua_test where ma_so_cach_ly ="+tt;
+		String sql="delete from thong_tin_cach_li where ma_so_cach_ly ="+tt;
+		
+		try {
+			Statement stm=ConnectDB.toconnection().createStatement();
+			stm.execute(sql2);
+			stm.execute(sql);
+			JOptionPane.showMessageDialog(null, "Xóa thông tin cách ly thành công");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Xóa thông tin cách ly thất bại","Error",JOptionPane.WARNING_MESSAGE);
+			e.printStackTrace();
+			
+		}
+	}
+	public static int getthelastttcachly() {
+		String sql=" select top(1) ma_so_cach_ly from thong_tin_cach_li order by ma_so_cach_ly desc ";
+		try {
+			Statement stm=ConnectDB.toconnection().createStatement();
+			ResultSet res=stm.executeQuery(sql);
+			if(res!=null) {
+			res.next();
+			int a=res.getInt(1)+1;
+			stm.close();
+			res.close();
+			return a;
+			}
+			else return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	}
 	

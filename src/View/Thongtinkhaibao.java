@@ -11,7 +11,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-
 import Object.ttcachly;
 import Object.ttkhaibao;
 import data.ttkhaibao_mt;
@@ -20,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class Thongtinkhaibao extends JPanel {
@@ -44,10 +44,18 @@ public class Thongtinkhaibao extends JPanel {
 		btnNew.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNew.setBounds(1005, 51, 85, 47);
 		add(btnNew);
-		
+		JButton btndelete = new JButton("Delete");
+		btndelete.setEnabled(false);
+		btndelete.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btndelete.setBounds(1005, 112, 85, 47);
+		add(btndelete);
 		JButton btnedit = new JButton("Edit");
+		btnedit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnedit.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnedit.setBounds(1005, 123, 85, 47);
+		btnedit.setBounds(1005, 169, 85, 47);
 		btnedit.setEnabled(false);
 		add(btnedit);
 		
@@ -73,6 +81,7 @@ public class Thongtinkhaibao extends JPanel {
 					now[6]=model.getValueAt(selectedRow, 6).toString();
 					now[7]=model.getValueAt(selectedRow, 5).toString();
 					btnedit.setEnabled(true);
+					btndelete.setEnabled(true);
 				}
 			}
 		});
@@ -93,6 +102,8 @@ public class Thongtinkhaibao extends JPanel {
 		txtfind.setColumns(10);
 		txtfind.setBounds(155, 10, 231, 31);
 		add(txtfind);
+		
+
 		btnNew.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -107,7 +118,19 @@ public class Thongtinkhaibao extends JPanel {
 				editkb.setVisible(true);
 			}
 		});
-		
+
+		btndelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int a= JOptionPane.showConfirmDialog(null, "Xóa khai báo số "+now[4]+" trong danh sách", "Question",JOptionPane.YES_NO_OPTION);
+//				System.out.println("Gia tri a = "+a);
+//				chọn yes -> a=0 ,no a=1
+				if(a==0) {
+					ttkhaibao_mt.delelettkhaibao(now[4]);
+					updatetable();
+				}
+			}
+		});
 txtfind.getDocument().addDocumentListener(new DocumentListener() {
 			
 			@Override

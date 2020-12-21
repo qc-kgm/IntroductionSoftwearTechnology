@@ -3,7 +3,7 @@ package Object;
 import java.sql.Date;
 
 public class ttcachly {
-	private String ma_cachly;
+	private int ma_cachly;
 	private int id_nk;
 	private String hoten;
 	private Date batdau;
@@ -23,10 +23,10 @@ public class ttcachly {
 		this.noicachly = noicachly;
 	}
 
-	public String getMa_cachly() {
+	public int getMa_cachly() {
 		return ma_cachly;
 	}
-	public void setMa_cachly(String ma_cachly) {
+	public void setMa_cachly(int ma_cachly) {
 		this.ma_cachly = ma_cachly;
 	}
 	public int getId_nk() {

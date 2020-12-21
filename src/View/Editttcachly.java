@@ -215,7 +215,7 @@ public class Editttcachly extends JFrame {
 				}
 				ex.setNoicachly(txtnoicl.getText().toString().trim());
 				ex.setHoten(txthoten.getText().trim());
-				ex.setMa_cachly(txtmacl.getText().trim());
+				ex.setMa_cachly(Integer.parseInt(txtmacl.getText().trim()));
 				ex.setMucdocachly(txtmucdo.getText().trim());
 				if(no.isSelected()) ex.setDatest(false); 
 				if(yes.isSelected()) ex.setDatest(true);
